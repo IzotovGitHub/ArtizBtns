@@ -1,0 +1,12 @@
+{
+  "name": "ArtizBtns",
+  "version": "0.1.0",
+  "description": "Reusable button handling library",
+  "keywords": [
+    "arduino",
+    "buttons",
+    "esp32"
+  ],
+  "frameworks": "arduino",
+  "platforms": "*"
+}
