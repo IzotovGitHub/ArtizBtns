@@ -28,11 +28,12 @@ ButtonItem buttons[] = {
     ButtonItem(19)
 };
 
-ButtonListener buttonListener(buttons);
+Configuration buttonConfig(50, INPUT_PULLUP, buttons);
+ButtonListener buttonListener;
 
 void setup()
 {
-    ButtonConfigurator::configureButtons(buttons, INPUT_PULLUP);
+    ButtonConfigurator::configureButtons(buttonConfig);
 }
 
 void loop()
@@ -53,9 +54,9 @@ void loop()
 }
 ```
 
-`ButtonItem` arrays are passed by reference, so `ButtonListener` determines
-the number of buttons automatically. Keep the array alive for at least as long
-as the listener, since the listener stores a pointer to its elements.
+The configuration stores a pointer to the `ButtonItem` array, and the listener
+uses the shared configuration saved by `ButtonConfigurator`. Keep both the
+configuration and its button array alive for as long as the library uses them.
 
 ## Input behavior
 

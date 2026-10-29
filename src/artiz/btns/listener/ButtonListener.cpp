@@ -1,9 +1,9 @@
 #include "artiz/btns/listener/header/ButtonListener.h"
 
+#include "artiz/btns/configurator/ButtonConfigurator.h"
+
 namespace
 {
-constexpr uint32_t debounceDelayMs = 50;
-
 ButtonState readButtonState(uint8_t pin)
 {
     return digitalRead(pin) == LOW ? ButtonState::Pressed : ButtonState::Released;
@@ -13,10 +13,11 @@ ButtonState readButtonState(uint8_t pin)
 void ButtonListener::listenButtons()
 {
     const uint32_t now = millis();
+    const Configuration &config = ButtonConfigurator::getConfig();
 
-    for (size_t i = 0; i < itemCount; ++i)
+    for (size_t i = 0; i < config.itemCount; ++i)
     {
-        ButtonItem &item = items[i];
+        ButtonItem &item = config.items[i];
         const ButtonState currentRawState = readButtonState(item.pin);
         item.transition = ButtonTransition::None;
 
@@ -27,7 +28,7 @@ void ButtonListener::listenButtons()
         }
 
         if (item.rawState != item.state &&
-            static_cast<uint32_t>(now - item.rawStateChangedAtMs) >= debounceDelayMs)
+            static_cast<uint32_t>(now - item.rawStateChangedAtMs) >= config.debounceDelayMs)
         {
             item.state = item.rawState;
             item.stateChangedAtMs = now;
