@@ -16,7 +16,7 @@ struct ButtonsConfiguration
     ButtonsConfiguration(
         uint32_t debounceDelayMs,
         uint8_t mode,
-        uint8_t (&pins)[N])
+        const uint8_t (&pins)[N])
         : debounceDelayMs(debounceDelayMs),
           mode(mode),
           pins(pins),
@@ -26,6 +26,6 @@ struct ButtonsConfiguration
 
     uint32_t debounceDelayMs;
     uint8_t mode;
-    uint8_t *pins;
+    const uint8_t *pins;
     size_t pinsCount;
 };

@@ -3,6 +3,8 @@
 #include "artiz/btns/core/ButtonItem.h"
 #include "artiz/btns/core/ButtonState.h"
 #include "artiz/btns/core/ButtonTransition.h"
+#include "artiz/btns/configurator/ButtonConfigurator.h"
+#include "artiz/btns/configurator/ButtonsConfiguration.h"
 
 namespace
 {
@@ -19,7 +21,7 @@ public:
     static void updateState(ButtonItem (&items)[N])
     {
         const uint32_t now = millis();
-        const Configuration &config = ButtonConfigurator::getConfig();
+        const ButtonsConfiguration &config = ButtonConfigurator::getConfig();
 
         for (size_t i = 0; i < N; ++i)
         {
