@@ -3,27 +3,27 @@
 #include <Arduino.h>
 
 #include "artiz/btns/core/ButtonItem.h"
-#include "artiz/btns/configurator/Configuration.h"
+#include "artiz/btns/configurator/ButtonsConfiguration.h"
 
 class ButtonConfigurator
 {
 public:
-    static void configureButtons(const Configuration& cfg)
+    static void configureButtons(const ButtonsConfiguration& cfg)
     {
         config = cfg;
 
-        for (size_t i = 0; i < config.itemCount; ++i)
+        for (size_t i = 0; i < config.pinsCount; ++i)
         {
-            pinMode(config.items[i].pin, config.mode);
+            pinMode(config.pins[i], config.mode);
         }
     }
 
-    static const Configuration& getConfig()
+    static const ButtonsConfiguration& getConfig()
     {
         return config;
     }
 
 private:
     // Единственный общий объект конфигурации для всех компонентов библиотеки.
-    inline static Configuration config{};
+    inline static ButtonsConfiguration config{};
 };

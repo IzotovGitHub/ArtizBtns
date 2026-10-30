@@ -2,32 +2,30 @@
 
 #include <Arduino.h>
 
-#include "artiz/btns/core/ButtonItem.h"
-
-struct Configuration
+struct ButtonsConfiguration
 {
-    Configuration()
+    ButtonsConfiguration()
         : debounceDelayMs(50),
           mode(INPUT),
-          items(nullptr),
-          itemCount(0)
+          pins(nullptr),
+          pinsCount(0)
     {
     }
 
     template <size_t N>
-    Configuration(
+    ButtonsConfiguration(
         uint32_t debounceDelayMs,
         uint8_t mode,
-        ButtonItem (&items)[N])
+        uint8_t (&pins)[N])
         : debounceDelayMs(debounceDelayMs),
           mode(mode),
-          items(items),
-          itemCount(N)
+          pins(pins),
+          pinsCount(N)
     {
     }
 
     uint32_t debounceDelayMs;
     uint8_t mode;
-    ButtonItem *items;
-    size_t itemCount;
+    uint8_t *pins;
+    size_t pinsCount;
 };
